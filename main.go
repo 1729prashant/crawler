@@ -74,8 +74,6 @@ func main() {
 	cfg.wg.Wait()
 
 	// Print the results
-	fmt.Println("\nCrawl Results:")
-	for page, count := range cfg.pages {
-		fmt.Printf("%s: visited %d time(s)\n", page, count)
-	}
+	printReport(cfg.pages, baseURL)
+
 }
