@@ -9,15 +9,10 @@ import (
 
 // getURLsFromHTML parses the given HTML body to find all URLs in <a>, <img>, and <script> tags,
 // converting relative URLs to absolute URLs using the rawBaseURL.
-func getURLsFromHTML(htmlBody, rawBaseURL string) ([]string, error) {
+func getURLsFromHTML(htmlBody string, baseURL *url.URL) ([]string, error) {
 	// Early return for empty HTML body to avoid parsing errors
 	if htmlBody == "" {
 		return []string{}, nil
-	}
-
-	baseURL, err := url.Parse(rawBaseURL)
-	if err != nil {
-		return nil, err
 	}
 
 	doc, err := html.Parse(strings.NewReader(htmlBody))
