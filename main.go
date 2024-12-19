@@ -19,14 +19,12 @@ func main() {
 	baseURL := os.Args[1]
 	fmt.Printf("starting crawl of: %s\n", baseURL)
 
-	// Fetch HTML
-	html, err := getHTML(baseURL)
-	if err != nil {
-		fmt.Printf("Error fetching HTML: %v\n", err)
-		os.Exit(1)
-	}
+	pages := make(map[string]int)
+	crawlPage(baseURL, baseURL, pages)
 
-	// Print some HTML (first 500 characters for brevity)
-	fmt.Println("HTML:")
-	fmt.Println(html) // Print only first 5000 characters to avoid overwhelming output
+	// Print the results
+	fmt.Println("\nCrawl Results:")
+	for page, count := range pages {
+		fmt.Printf("%s: visited %d time(s)\n", page, count)
+	}
 }
